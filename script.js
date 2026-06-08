@@ -85,6 +85,8 @@ function openPinModal(context) {
   if (title) title.innerHTML = context === 'intro'
     ? '<em>masukkan password</em>'
     : '<em>Masukkan PIN</em>';
+  // Set hint text per context
+  if (pinHint) pinHint.textContent = context === 'intro' ? 'mushroom' : 'pin hp kamu';
   pinModal.hidden = false;
   document.body.style.overflow = 'hidden';
   setTimeout(() => pinInput.focus(), 150);
