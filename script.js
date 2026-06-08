@@ -67,38 +67,62 @@ const letterContent = document.getElementById('letter-content');
 const gateInput = document.getElementById('letter-gate-input');
 const gateBtn = document.getElementById('letter-gate-btn');
 const gateErr = document.getElementById('letter-gate-err');
+const gateHint = document.getElementById('letter-gate-hint');
+const letterVideo = document.getElementById('letter-video');
+const letterVideoPlayer = document.getElementById('letter-video-player');
+const letterVideoNext = document.getElementById('letter-video-next');
 
 function unlockLetter() {
   const val = gateInput.value.trim();
   if (val === LETTER_PASSWORD) {
-    // Hide gate
+    // 1. Hide gate
     letterGate.classList.add('locked-out');
     setTimeout(() => { letterGate.style.display = 'none'; }, 700);
 
-    // Reveal content
-    letterContent.removeAttribute('aria-hidden');
-    letterContent.classList.add('unlocked');
-
-    // Trigger scroll reveals inside letter
-    const reveals = letterContent.querySelectorAll('.reveal');
-    reveals.forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), 200 + i * 120);
-    });
+    // 2. Show video player
+    letterVideo.hidden = false;
+    letterVideo.classList.add('unlocked');
+    setTimeout(() => {
+      letterVideoPlayer.play().catch(() => {}); // autoplay best-effort
+    }, 400);
   } else {
-    // Wrong password
+    // Wrong — show error + reveal hint after short delay
     gateErr.classList.add('show');
     gateInput.value = '';
     gateInput.classList.add('shake');
     setTimeout(() => {
+      gateHint.classList.add('show');
+    }, 600);
+    setTimeout(() => {
       gateInput.classList.remove('shake');
       gateErr.classList.remove('show');
-    }, 1200);
+    }, 1400);
   }
 }
 
 gateBtn.addEventListener('click', unlockLetter);
 gateBtn.addEventListener('touchend', (e) => { e.preventDefault(); unlockLetter(); });
 gateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlockLetter(); });
+
+// Video → Letter transition
+function showLetter() {
+  letterVideoPlayer.pause();
+  letterVideo.classList.add('fading-out');
+  setTimeout(() => {
+    letterVideo.hidden = true;
+    letterContent.removeAttribute('aria-hidden');
+    letterContent.classList.add('unlocked');
+    const reveals = letterContent.querySelectorAll('.reveal');
+    reveals.forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 200 + i * 100);
+    });
+  }, 500);
+}
+
+if (letterVideoNext) {
+  letterVideoNext.addEventListener('click', showLetter);
+  letterVideoNext.addEventListener('touchend', (e) => { e.preventDefault(); showLetter(); });
+}
 
 /* ═══════════════════════════════
    2. MUSIC PLAYER

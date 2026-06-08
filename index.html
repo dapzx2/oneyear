@@ -47,9 +47,6 @@
       <p class="intro-sub">satu tahun perjalanan kita</p>
       <button id="intro-btn" class="intro-btn" aria-label="Buka halaman anniversary">
         <span>Buka</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
       </button>
     </div>
   </div>
@@ -69,7 +66,7 @@
       <div class="hero-content">
         <p class="hero-eyebrow reveal">Anniversary</p>
         <h2 class="hero-title reveal d1">
-          <em>Satu tahun</em><br>yang sempurna
+          <em>One Year</em><br>Still You
         </h2>
         <p class="hero-sub reveal d2">09 Juni 2025 → 09 Juni 2026</p>
       </div>
@@ -83,7 +80,7 @@
       <div class="ghost-wrap ghost-wrap--light" data-num="365" aria-hidden="true">
         <div class="ghost-inner">
           <div class="section-inner">
-            <p class="eyebrow reveal">Sudah Bersama</p>
+            <p class="eyebrow reveal">Time With You</p>
             <div class="counter-grid" id="counter-grid" aria-live="polite">
               <div class="counter-cell reveal d1">
                 <span class="counter-num" id="cnt-days">—</span>
@@ -103,7 +100,7 @@
               </div>
             </div>
             <p class="counter-caption reveal d2">
-              Sejak <em>9 Juni 2025</em> — setiap detiknya berarti.
+              banyak hal berubah,<br>tapi satu yang tetap:<br><em>aku senang bangett punya kamu :3</em>
             </p>
           </div>
         </div>
@@ -118,46 +115,102 @@
 
       <!-- PASSWORD GATE -->
       <div id="letter-gate" class="letter-gate" role="dialog" aria-modal="true" aria-label="Masukkan password">
-        <p class="letter-gate-tag">🔒 hanya untuk kamu</p>
+        <p class="letter-gate-tag">hanya untuk kamu</p>
         <h2 class="letter-gate-title"><em>Ada pesan rahasia</em></h2>
-        <p class="letter-gate-hint">password hp kamu</p>
         <div class="letter-gate-input-wrap">
-          <input
-            id="letter-gate-input"
-            class="letter-gate-input"
-            type="password"
-            inputmode="numeric"
-            maxlength="10"
-            placeholder="••••"
-            autocomplete="off"
-            aria-label="Masukkan password"
-          >
+          <input id="letter-gate-input" class="letter-gate-input" type="password" inputmode="numeric" maxlength="10"
+            placeholder="••••" autocomplete="off" aria-label="Masukkan password">
           <p class="letter-gate-err" id="letter-gate-err">salah, coba lagi 🥺</p>
+          <p class="letter-gate-hint" id="letter-gate-hint">pin hp kamu</p>
         </div>
         <button class="letter-gate-btn" id="letter-gate-btn">Buka Pesan</button>
+      </div>
+
+      <!-- VIDEO PLAYER (shows after correct pin, before letter) -->
+      <div id="letter-video" class="letter-video-wrap" hidden>
+        <p class="letter-video-label">our story ✦</p>
+        <video id="letter-video-player" class="letter-video" src="images/our-story.mp4" playsinline controls></video>
+        <button id="letter-video-next" class="letter-video-next">
+          <span>Lanjut ke pesan</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" width="16"
+            height="16">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
       </div>
 
       <!-- LETTER CONTENT (hidden until unlocked) -->
       <div class="section-inner letter-content-wrap" id="letter-content" aria-hidden="true">
         <p class="eyebrow eyebrow-light reveal">Love Letter</p>
-        <h2 class="letter-title reveal d1"><em>Untuk kamu,</em></h2>
+        <h2 class="letter-title reveal d1"><em>hayyiiee sayangg :3</em></h2>
         <div class="letter-body">
-          <p class="letter-p reveal d1">
-            Satu tahun terasa seperti halaman-halaman buku yang terlipat dengan indah —
-            penuh dengan momen kecil yang menjelma jadi kenangan abadi.
+          <p class="letter-p reveal d1">aku mulai dari yang simple aja yaa</p>
+          <p class="letter-p reveal d1">thank you for being here &lt;3</p>
+          <p class="letter-p reveal d2">
+            bukan cuma buat hari ini,<br>
+            tapi buat semua hari kecil yang sudah kita lewati sama sama.
           </p>
           <p class="letter-p reveal d2">
-            Kamu adalah alasan mengapa hari-hari biasa terasa luar biasa.
-            Tawa kamu, cara kamu melihatku, dan setiap hal kecil yang kamu lakukan —
-            semuanya sudah terukir dalam.
+            dari chat random yang tiba tiba jadi panjang,<br>
+            dari foto-foto lucu yang kadang bikin senyum sendiri,<br>
+            dari cerita kecil yang cuma kita berdua yang ngerti,<br>
+            sampai momen sederhana yang ternyata selalu aku ingat.
           </p>
           <p class="letter-p reveal d3">
-            Terima kasih sudah ada, sudah memilih, dan sudah bertahan.
-            Satu tahun ini hanyalah bab pertama — masih banyak halaman yang ingin aku tulis bersamamu.
+            setahun sama kamu itu jujur tidaa kerasa lohh.<br>
+            kayak tiba tiba aja,<br>
+            ehh kita sudah sejauh ini yaa hehe :3
           </p>
-          <p class="letter-sign reveal d4">
-            <em>dengan cinta,</em><br>
-            <span class="letter-name">selalu milikmu ✦</span>
+          <p class="letter-p reveal d3">
+            sama kamu,<br>
+            hari yang biasa aja bisa terasa lebih lembut.<br>
+            hal kecil bisa jadi lucu.<br>
+            dan waktu yang sebentar bisa terasa kurang terus.
+          </p>
+          <p class="letter-p reveal d4">
+            makasii yaa sayangg,<br>
+            sudah jadi tempat yang nyaman buat akuu.<br>
+            makasii sudah bikin hari-hari aku punya warna baruu.<br>
+            makasii sudah tetap di sini sampai sejauh ini.
+          </p>
+          <p class="letter-p reveal d4">
+            maaf yaa kalau hari ini kalo masih ada kurangnya :&lt;<br>
+            aku tau aku juga masih banyak kurangnya sih :&gt;<br>
+            masih belum sempurna,<br>
+            masih harus banyak belajar.
+          </p>
+          <p class="letter-p reveal d4">
+            tapi aku mau terus jadi lebih baik.<br>
+            bukan cuma buat aku aja,<br>
+            tapi juga buat kitaa ehe :3
+          </p>
+          <p class="letter-p reveal" style="font-style:italic; margin-top:1rem;">
+            i don't need a perfect story.<br><br>
+            i just want a story<br>
+            where it is still you,<br>
+            still me,<br>
+            and still us.
+          </p>
+          <p class="letter-p reveal">
+            one year down,<br>
+            and i still want more little days with you.<br><br>
+            more small talks,<br>
+            more silly photos,<br>
+            more random laughs,<br>
+            more quiet moments,<br>
+            more "aku kangen",<br>
+            more us.
+          </p>
+          <p class="letter-p reveal">
+            tetap jadi Putri yang aku suka yaa.<br>
+            yang lucu,<br>
+            yang manis,<br>
+            yang bikin kangen,<br>
+            dan yang selalu punya tempat paling lembut di hati aku.
+          </p>
+          <p class="letter-sign reveal">
+            <em>with love,</em><br>
+            <span class="letter-name">Dava</span>
           </p>
         </div>
       </div>
@@ -180,7 +233,7 @@
       <div class="section-inner">
         <p class="eyebrow eyebrow-light reveal">Kenangan Kita</p>
         <h2 class="section-title section-title-light reveal d1">
-          <em>Setahun dalam bingkai</em>
+          <em>Little Pieces of Us</em>
         </h2>
       </div>
 
@@ -279,20 +332,22 @@
     <section id="closing" class="closing-section dark-section" aria-label="Penutup">
       <div class="closing-ring" aria-hidden="true">
         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="95" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 6"/>
-          <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="0.3"/>
+          <circle cx="100" cy="100" r="95" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 6" />
+          <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="0.3" />
         </svg>
         <span class="closing-ring-text">✦ one year ✦ one year ✦ one year ✦</span>
       </div>
       <div class="closing-content">
         <h2 class="closing-title reveal">
-          <em>Satu tahun,</em><br>selamanya masih di depan.
+          <em>one year,</em><br>still my favorite
         </h2>
-        <p class="closing-sub reveal d1">09 · 06 · 2025 — 09 · 06 · 2026</p>
+        <p class="closing-sub reveal d1">satu tahun sudah lewat,<br>tapi aku masih mau terus lanjut sama kamu.</p>
+        <p class="closing-sub reveal d2" style="margin-top:.5rem; letter-spacing:.25em;">09 Juni 2025 — 09 Juni 2026</p>
         <div class="closing-heart reveal d2" aria-hidden="true">
           <svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 85C50 85 5 55 5 28C5 14 16 5 28 5C36 5 43 9 50 17C57 9 64 5 72 5C84 5 95 14 95 28C95 55 50 85 50 85Z"
-              fill="currentColor"/>
+            <path
+              d="M50 85C50 85 5 55 5 28C5 14 16 5 28 5C36 5 43 9 50 17C57 9 64 5 72 5C84 5 95 14 95 28C95 55 50 85 50 85Z"
+              fill="currentColor" />
           </svg>
         </div>
       </div>
@@ -314,4 +369,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
