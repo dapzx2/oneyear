@@ -58,71 +58,74 @@ introBtn.addEventListener('click', handleIntroOpen);
 introBtn.addEventListener('touchend', handleIntroOpen);
 
 /* ═══════════════════════════════
-   LETTER PASSWORD GATE
+   LETTER PIN MODAL
 ═══════════════════════════════ */
 const LETTER_PASSWORD = '0906';
 
-const letterGate = document.getElementById('letter-gate');
-const letterContent = document.getElementById('letter-content');
-const gateInput = document.getElementById('letter-gate-input');
-const gateBtn = document.getElementById('letter-gate-btn');
-const gateErr = document.getElementById('letter-gate-err');
-const gateHint = document.getElementById('letter-gate-hint');
-const letterVideo = document.getElementById('letter-video');
-const letterVideoPlayer = document.getElementById('letter-video-player');
-const letterVideoNext = document.getElementById('letter-video-next');
+const openLetterBtn   = document.getElementById('open-letter-btn');
+const pinModal        = document.getElementById('pin-modal');
+const pinModalBackdrop= document.getElementById('pin-modal-backdrop');
+const pinModalClose   = document.getElementById('pin-modal-close');
+const pinInput        = document.getElementById('pin-input');
+const pinErr          = document.getElementById('pin-err');
+const pinHint         = document.getElementById('pin-hint');
+const pinSubmit       = document.getElementById('pin-submit');
+const videoModal      = document.getElementById('video-modal');
+const storyVideo      = document.getElementById('story-video');
+const videoNextBtn    = document.getElementById('video-next-btn');
+const letterLockArea  = document.getElementById('letter-lock-area');
+const letterContent   = document.getElementById('letter-content');
 
-function unlockLetter() {
-  const val = gateInput.value.trim();
+function openPinModal() {
+  pinModal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => pinInput.focus(), 150);
+}
+
+function closePinModal() {
+  pinModal.hidden = true;
+  document.body.style.overflow = '';
+  pinInput.value = '';
+  pinErr.classList.remove('show');
+  pinHint.classList.remove('show');
+}
+
+function checkPin() {
+  const val = pinInput.value.trim();
   if (val === LETTER_PASSWORD) {
-    // 1. Hide gate
-    letterGate.classList.add('locked-out');
-    setTimeout(() => { letterGate.style.display = 'none'; }, 700);
-
-    // 2. Show video player
-    letterVideo.hidden = false;
-    letterVideo.classList.add('unlocked');
-    setTimeout(() => {
-      letterVideoPlayer.play().catch(() => {}); // autoplay best-effort
-    }, 400);
+    closePinModal();
+    // Show video modal
+    videoModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => storyVideo.play().catch(() => {}), 300);
   } else {
-    // Wrong — show error + reveal hint after short delay
-    gateErr.classList.add('show');
-    gateInput.value = '';
-    gateInput.classList.add('shake');
+    pinErr.classList.add('show');
+    pinInput.value = '';
+    pinInput.classList.add('shake');
+    setTimeout(() => pinHint.classList.add('show'), 600);
     setTimeout(() => {
-      gateHint.classList.add('show');
-    }, 600);
-    setTimeout(() => {
-      gateInput.classList.remove('shake');
-      gateErr.classList.remove('show');
+      pinInput.classList.remove('shake');
+      pinErr.classList.remove('show');
     }, 1400);
   }
 }
 
-gateBtn.addEventListener('click', unlockLetter);
-gateBtn.addEventListener('touchend', (e) => { e.preventDefault(); unlockLetter(); });
-gateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlockLetter(); });
-
-// Video → Letter transition
 function showLetter() {
-  letterVideoPlayer.pause();
-  letterVideo.classList.add('fading-out');
-  setTimeout(() => {
-    letterVideo.hidden = true;
-    letterContent.removeAttribute('aria-hidden');
-    letterContent.classList.add('unlocked');
-    const reveals = letterContent.querySelectorAll('.reveal');
-    reveals.forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), 200 + i * 100);
-    });
-  }, 500);
+  storyVideo.pause();
+  videoModal.hidden = true;
+  document.body.style.overflow = '';
+  // Hide lock card, show letter
+  letterLockArea.style.display = 'none';
+  letterContent.style.display = 'block';
+  letterContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-if (letterVideoNext) {
-  letterVideoNext.addEventListener('click', showLetter);
-  letterVideoNext.addEventListener('touchend', (e) => { e.preventDefault(); showLetter(); });
-}
+if (openLetterBtn)   openLetterBtn.addEventListener('click', openPinModal);
+if (pinModalBackdrop)pinModalBackdrop.addEventListener('click', closePinModal);
+if (pinModalClose)   pinModalClose.addEventListener('click', closePinModal);
+if (pinSubmit)       pinSubmit.addEventListener('click', checkPin);
+if (pinInput)        pinInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPin(); });
+if (videoNextBtn)    videoNextBtn.addEventListener('click', showLetter);
 
 /* ═══════════════════════════════
    2. MUSIC PLAYER
