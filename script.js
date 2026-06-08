@@ -49,9 +49,8 @@ function openMain() {
 let introBtnActivated = false;
 function handleIntroOpen(e) {
   if (introBtnActivated) return;
-  introBtnActivated = true;
   e.preventDefault();
-  openMain();
+  openPinModal('intro'); // require password before opening
 }
 
 introBtn.addEventListener('click', handleIntroOpen);
@@ -60,23 +59,31 @@ introBtn.addEventListener('touchend', handleIntroOpen);
 /* ═══════════════════════════════
    LETTER PIN MODAL
 ═══════════════════════════════ */
+let pinContext = 'intro'; // 'intro' | 'letter'
 const LETTER_PASSWORD = '0906';
 
-const openLetterBtn   = document.getElementById('open-letter-btn');
-const pinModal        = document.getElementById('pin-modal');
-const pinModalBackdrop= document.getElementById('pin-modal-backdrop');
-const pinModalClose   = document.getElementById('pin-modal-close');
-const pinInput        = document.getElementById('pin-input');
-const pinErr          = document.getElementById('pin-err');
-const pinHint         = document.getElementById('pin-hint');
-const pinSubmit       = document.getElementById('pin-submit');
-const videoModal      = document.getElementById('video-modal');
-const storyVideo      = document.getElementById('story-video');
-const videoNextBtn    = document.getElementById('video-next-btn');
-const letterLockArea  = document.getElementById('letter-lock-area');
-const letterContent   = document.getElementById('letter-content');
+const openLetterBtn    = document.getElementById('open-letter-btn');
+const pinModal         = document.getElementById('pin-modal');
+const pinModalBackdrop = document.getElementById('pin-modal-backdrop');
+const pinModalClose    = document.getElementById('pin-modal-close');
+const pinInput         = document.getElementById('pin-input');
+const pinErr           = document.getElementById('pin-err');
+const pinHint          = document.getElementById('pin-hint');
+const pinSubmit        = document.getElementById('pin-submit');
+const videoModal       = document.getElementById('video-modal');
+const storyVideo       = document.getElementById('story-video');
+const videoNextBtn     = document.getElementById('video-next-btn');
+const letterLockArea   = document.getElementById('letter-lock-area');
+const letterContent    = document.getElementById('letter-content');
+const letterPopup      = document.getElementById('letter-popup');
+const letterPopupClose = document.getElementById('letter-popup-close');
 
-function openPinModal() {
+function openPinModal(context) {
+  pinContext = context || 'letter';
+  const title = pinModal.querySelector('.pin-modal-title');
+  if (title) title.innerHTML = context === 'intro'
+    ? '<em>masukkan password</em>'
+    : '<em>Masukkan PIN</em>';
   pinModal.hidden = false;
   document.body.style.overflow = 'hidden';
   setTimeout(() => pinInput.focus(), 150);
@@ -92,13 +99,21 @@ function closePinModal() {
 
 function checkPin() {
   const val = pinInput.value.trim();
-  const valid = val === LETTER_PASSWORD || val.toLowerCase() === 'moya';
+  const isIntro = pinContext === 'intro';
+  const valid = isIntro
+    ? val.toLowerCase() === 'moya'
+    : (val === LETTER_PASSWORD || val.toLowerCase() === 'moya');
+
   if (valid) {
     closePinModal();
-    // Show video modal
-    videoModal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => storyVideo.play().catch(() => {}), 300);
+    if (isIntro) {
+      introBtnActivated = true;
+      openMain();
+    } else {
+      videoModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => storyVideo.play().catch(() => {}), 300);
+    }
   } else {
     pinErr.classList.add('show');
     pinInput.value = '';
@@ -114,25 +129,25 @@ function checkPin() {
 function showLetter() {
   storyVideo.pause();
   videoModal.hidden = true;
-  document.body.style.overflow = '';
-  // Hide lock card, show letter (override old CSS)
-  letterLockArea.style.display = 'none';
-  const lc = letterContent;
-  lc.style.display       = 'block';
-  lc.style.opacity       = '1';
-  lc.style.maxHeight     = 'none';
-  lc.style.overflow      = 'visible';
-  lc.style.pointerEvents = 'auto';
-  lc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (letterLockArea) letterLockArea.style.display = 'none';
+  if (letterPopup) {
+    letterPopup.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
 }
 
+function closeLetterPopup() {
+  if (letterPopup) letterPopup.hidden = true;
+  document.body.style.overflow = '';
+}
 
-if (openLetterBtn)   openLetterBtn.addEventListener('click', openPinModal);
-if (pinModalBackdrop)pinModalBackdrop.addEventListener('click', closePinModal);
-if (pinModalClose)   pinModalClose.addEventListener('click', closePinModal);
-if (pinSubmit)       pinSubmit.addEventListener('click', checkPin);
-if (pinInput)        pinInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPin(); });
-if (videoNextBtn)    videoNextBtn.addEventListener('click', showLetter);
+if (openLetterBtn)    openLetterBtn.addEventListener('click', () => openPinModal('letter'));
+if (pinModalBackdrop) pinModalBackdrop.addEventListener('click', closePinModal);
+if (pinModalClose)    pinModalClose.addEventListener('click', closePinModal);
+if (pinSubmit)        pinSubmit.addEventListener('click', checkPin);
+if (pinInput)         pinInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPin(); });
+if (videoNextBtn)     videoNextBtn.addEventListener('click', showLetter);
+if (letterPopupClose) letterPopupClose.addEventListener('click', closeLetterPopup);
 
 /* ═══════════════════════════════
    2. MUSIC PLAYER
