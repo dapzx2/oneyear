@@ -451,8 +451,8 @@ body.main-open #main {
 
 .hero-img {
   width: 100%;
-  /* Take roughly top 65% of screen height */
-  height: 65%;
+  /* svh = small viewport height — stable, ignores address bar changes */
+  height: 65svh;
   object-fit: contain;
   object-position: center top;
   flex-shrink: 0;
