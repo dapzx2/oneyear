@@ -1092,10 +1092,101 @@ body.main-open #main {
 
 .story-video {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 6px 6px 0 0;
   background: #000;
   display: block;
 }
+
+/* ─── CUSTOM VIDEO PLAYER ─── */
+.vid-player {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+}
+
+/* Big centered play/pause overlay */
+.vid-overlay-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.9);
+  background: transparent;
+  transition: background .2s;
+  z-index: 2;
+}
+
+.vid-overlay-play:active { background: rgba(0,0,0,.15); }
+
+/* Bottom control bar */
+.vid-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .5rem .75rem .6rem;
+  background: linear-gradient(transparent, rgba(0,0,0,.75));
+  z-index: 3;
+}
+
+.vid-progress-wrap {
+  position: relative;
+  height: 3px;
+  margin-bottom: .5rem;
+}
+
+.vid-progress-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.2);
+  border-radius: 99px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vid-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--dusty-rose);
+  border-radius: 99px;
+  transition: width .1s linear;
+}
+
+.vid-progress-input {
+  position: absolute;
+  inset: -6px 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  height: 15px;
+}
+
+.vid-bar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vid-time {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .55rem;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.7);
+}
+
+.vid-fs-btn {
+  color: rgba(255,255,255,.7);
+  transition: color .2s;
+  display: flex;
+  align-items: center;
+}
+
+.vid-fs-btn:hover { color: #fff; }
+
 
 .video-next-btn {
   margin-top: 1.75rem;

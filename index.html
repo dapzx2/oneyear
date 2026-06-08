@@ -367,10 +367,41 @@
   <!-- ─── VIDEO MODAL ─── -->
   <div id="video-modal" class="video-modal" hidden role="dialog" aria-modal="true">
     <div class="video-modal-inner">
-      <p class="video-modal-label">lucuu jadi aku masukin kesini :3</p>
-      <video id="story-video" class="story-video" src="images/our-story.mp4" playsinline controls></video>
+      <p class="video-modal-label">our story ✦</p>
+
+      <!-- Custom video player -->
+      <div class="vid-player" id="vid-player">
+        <video id="story-video" class="story-video" src="images/our-story.mp4" playsinline></video>
+
+        <!-- Big play overlay -->
+        <button class="vid-overlay-play" id="vid-overlay-play" aria-label="Play/Pause">
+          <svg id="vid-overlay-icon" viewBox="0 0 24 24" fill="currentColor" width="40" height="40">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <!-- Bottom controls bar -->
+        <div class="vid-bar">
+          <!-- progress scrubber -->
+          <div class="vid-progress-wrap">
+            <div class="vid-progress-bg" id="vid-progress-bg">
+              <div class="vid-progress-fill" id="vid-progress-fill"></div>
+            </div>
+            <input class="vid-progress-input" id="vid-progress-input" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+          </div>
+          <div class="vid-bar-row">
+            <span class="vid-time" id="vid-time">0:00 / 0:00</span>
+            <button class="vid-fs-btn" id="vid-fs-btn" aria-label="Fullscreen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <button id="video-next-btn" class="video-next-btn">
-        <span>Lanjut</span>
+        <span>Lanjut ke pesan</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"
           aria-hidden="true">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
