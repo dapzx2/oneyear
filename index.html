@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1C1210">
+  <meta name="description" content="Satu tahun bersama — merayakan setiap momen yang telah kita jalani berdua.">
+  <title>One Year — Anniversary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ─── FILM GRAIN ─── -->
+  <div id="grain" aria-hidden="true"></div>
+
+  <!-- ─── MUSIC PLAYER ─── -->
+  <div id="music-btn" class="music-btn" role="button" aria-label="Toggle background music" tabindex="0">
+    <div class="music-icon">
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar3"></span>
+      <span class="bar bar4"></span>
+    </div>
+    <audio id="bg-audio" loop>
+      <source src="images/backsound.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- ─── INTRO SCREEN ─── -->
+  <div id="intro" role="dialog" aria-modal="true" aria-label="Anniversary intro">
+    <div class="intro-petal intro-petal--1" aria-hidden="true"></div>
+    <div class="intro-petal intro-petal--2" aria-hidden="true"></div>
+    <div class="intro-petal intro-petal--3" aria-hidden="true"></div>
+    <div class="intro-content">
+      <p class="intro-eyebrow">09 · 06 · 2026</p>
+      <h1 class="intro-title">
+        <span class="intro-word">One</span>
+        <span class="intro-word">Year</span>
+      </h1>
+      <p class="intro-sub">satu tahun perjalanan kita</p>
+      <button id="intro-btn" class="intro-btn" aria-label="Buka halaman anniversary">
+        <span>Buka</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── MAIN CONTENT ─── -->
+  <main id="main" aria-label="Halaman Anniversary">
+
+    <!-- ══════════════════════════════════
+         SECTION 1: HERO
+    ══════════════════════════════════ -->
+    <section id="hero" class="hero" aria-label="Hero section">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="images/photobooth.jpg" alt="" class="hero-img" loading="eager">
+        <div class="hero-vignette"></div>
+        <div class="hero-vignette-top"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal">Anniversary</p>
+        <h2 class="hero-title reveal d1">
+          <em>Satu tahun</em><br>yang sempurna
+        </h2>
+        <p class="hero-sub reveal d2">09 Juni 2025 → 09 Juni 2026</p>
+      </div>
+      <div class="hero-scroll-hint" aria-hidden="true">scroll</div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SECTION 2: COUNTDOWN / COUNTER
+    ══════════════════════════════════ -->
+    <section id="counter-section" class="counter-section" aria-label="Together counter">
+      <div class="ghost-wrap ghost-wrap--light" data-num="365" aria-hidden="true">
+        <div class="ghost-inner">
+          <div class="section-inner">
+            <p class="eyebrow reveal">Sudah Bersama</p>
+            <div class="counter-grid" id="counter-grid" aria-live="polite">
+              <div class="counter-cell reveal d1">
+                <span class="counter-num" id="cnt-days">—</span>
+                <span class="counter-label">hari</span>
+              </div>
+              <div class="counter-cell reveal d2">
+                <span class="counter-num" id="cnt-hours">—</span>
+                <span class="counter-label">jam</span>
+              </div>
+              <div class="counter-cell reveal d3">
+                <span class="counter-num" id="cnt-mins">—</span>
+                <span class="counter-label">menit</span>
+              </div>
+              <div class="counter-cell reveal d4">
+                <span class="counter-num" id="cnt-secs">—</span>
+                <span class="counter-label">detik</span>
+              </div>
+            </div>
+            <p class="counter-caption reveal d2">
+              Sejak <em>9 Juni 2025</em> — setiap detiknya berarti.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SECTION 3: LOVE LETTER
+    ══════════════════════════════════ -->
+    <section id="letter" class="letter-section dark-section" aria-label="Love letter">
+      <div class="letter-deco" aria-hidden="true">I</div>
+
+      <!-- PASSWORD GATE -->
+      <div id="letter-gate" class="letter-gate" role="dialog" aria-modal="true" aria-label="Masukkan password">
+        <p class="letter-gate-tag">🔒 hanya untuk kamu</p>
+        <h2 class="letter-gate-title"><em>Ada pesan rahasia</em></h2>
+        <p class="letter-gate-hint">password hp kamu</p>
+        <div class="letter-gate-input-wrap">
+          <input
+            id="letter-gate-input"
+            class="letter-gate-input"
+            type="password"
+            inputmode="numeric"
+            maxlength="10"
+            placeholder="••••"
+            autocomplete="off"
+            aria-label="Masukkan password"
+          >
+          <p class="letter-gate-err" id="letter-gate-err">salah, coba lagi 🥺</p>
+        </div>
+        <button class="letter-gate-btn" id="letter-gate-btn">Buka Pesan</button>
+      </div>
+
+      <!-- LETTER CONTENT (hidden until unlocked) -->
+      <div class="section-inner letter-content-wrap" id="letter-content" aria-hidden="true">
+        <p class="eyebrow eyebrow-light reveal">Love Letter</p>
+        <h2 class="letter-title reveal d1"><em>Untuk kamu,</em></h2>
+        <div class="letter-body">
+          <p class="letter-p reveal d1">
+            Satu tahun terasa seperti halaman-halaman buku yang terlipat dengan indah —
+            penuh dengan momen kecil yang menjelma jadi kenangan abadi.
+          </p>
+          <p class="letter-p reveal d2">
+            Kamu adalah alasan mengapa hari-hari biasa terasa luar biasa.
+            Tawa kamu, cara kamu melihatku, dan setiap hal kecil yang kamu lakukan —
+            semuanya sudah terukir dalam.
+          </p>
+          <p class="letter-p reveal d3">
+            Terima kasih sudah ada, sudah memilih, dan sudah bertahan.
+            Satu tahun ini hanyalah bab pertama — masih banyak halaman yang ingin aku tulis bersamamu.
+          </p>
+          <p class="letter-sign reveal d4">
+            <em>dengan cinta,</em><br>
+            <span class="letter-name">selalu milikmu ✦</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════
+         SECTION 4: DIVIDER ORNAMENT
+    ══════════════════════════════════ -->
+    <div class="divider-ornament dark-section" aria-hidden="true">
+      <div class="ornament-line"></div>
+      <span class="ornament-sym">✦</span>
+      <div class="ornament-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         SECTION 5: PHOTO GALLERY
+    ══════════════════════════════════ -->
+    <section id="gallery" class="gallery-section dark-section" aria-label="Galeri foto">
+      <div class="section-inner">
+        <p class="eyebrow eyebrow-light reveal">Kenangan Kita</p>
+        <h2 class="section-title section-title-light reveal d1">
+          <em>Setahun dalam bingkai</em>
+        </h2>
+      </div>
+
+      <div class="gallery-grid reveal d1" id="gallery-grid" role="list">
+
+        <!-- Row 1: full-width portrait -->
+        <div class="gallery-item" role="listitem" data-index="0">
+          <div class="gallery-img-wrap">
+            <img src="images/candid-us.jpg" alt="Foto bersama" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: duo -->
+        <div class="gallery-item" role="listitem" data-index="1">
+          <div class="gallery-img-wrap">
+            <img src="images/valentines-1.jpg" alt="Valentine bersama" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item" role="listitem" data-index="2">
+          <div class="gallery-img-wrap">
+            <img src="images/valentines-2.jpg" alt="Valentine bersama 2" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: portrait + square -->
+        <div class="gallery-item" role="listitem" data-index="3">
+          <div class="gallery-img-wrap">
+            <img src="images/portrait-1.jpg" alt="Portrait 1" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item" role="listitem" data-index="4">
+          <div class="gallery-img-wrap">
+            <img src="images/studio-us.jpg" alt="Studio bersama" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 4: full-width -->
+        <div class="gallery-item" role="listitem" data-index="5">
+          <div class="gallery-img-wrap">
+            <img src="images/hero-birthday.jpg" alt="Photobooth bersama" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 5: trio -->
+        <div class="gallery-item" role="listitem" data-index="6">
+          <div class="gallery-img-wrap">
+            <img src="images/duo-left.jpg" alt="Foto berdua kiri" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item" role="listitem" data-index="7">
+          <div class="gallery-img-wrap">
+            <img src="images/duo-right.jpg" alt="Foto berdua kanan" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 6: wide -->
+        <div class="gallery-item" role="listitem" data-index="8">
+          <div class="gallery-img-wrap">
+            <img src="images/holding-hands.jpg" alt="Holding hands" loading="lazy" class="holding-hands-img">
+            <div class="gallery-overlay" aria-hidden="true">
+              <span class="gallery-overlay-icon">✦</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /gallery-grid -->
+    </section>
+
+    <!-- ══════════════════════════════════
+         SECTION 6: CLOSING
+    ══════════════════════════════════ -->
+    <section id="closing" class="closing-section dark-section" aria-label="Penutup">
+      <div class="closing-ring" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="95" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 6"/>
+          <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="0.3"/>
+        </svg>
+        <span class="closing-ring-text">✦ one year ✦ one year ✦ one year ✦</span>
+      </div>
+      <div class="closing-content">
+        <h2 class="closing-title reveal">
+          <em>Satu tahun,</em><br>selamanya masih di depan.
+        </h2>
+        <p class="closing-sub reveal d1">09 · 06 · 2025 — 09 · 06 · 2026</p>
+        <div class="closing-heart reveal d2" aria-hidden="true">
+          <svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 85C50 85 5 55 5 28C5 14 16 5 28 5C36 5 43 9 50 17C57 9 64 5 72 5C84 5 95 14 95 28C95 55 50 85 50 85Z"
+              fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- ─── LIGHTBOX ─── -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Foto viewer" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Tutup foto">✕</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Foto sebelumnya">‹</button>
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightbox-img" class="lightbox-img">
+    </div>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Foto berikutnya">›</button>
+    <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
+  </div>
+  <div class="lightbox-backdrop" id="lightbox-backdrop" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
