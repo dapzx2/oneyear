@@ -60,6 +60,7 @@ introBtn.addEventListener('touchend', handleIntroOpen);
    LETTER PIN MODAL
 ═══════════════════════════════ */
 let pinContext = 'intro'; // 'intro' | 'letter'
+let letterUnlocked = false; // skip PIN after first correct entry
 const LETTER_PASSWORD = '0906';
 
 const openLetterBtn    = document.getElementById('open-letter-btn');
@@ -110,6 +111,7 @@ function checkPin() {
       introBtnActivated = true;
       openMain();
     } else {
+      letterUnlocked = true;
       videoModal.hidden = false;
       document.body.style.overflow = 'hidden';
       setTimeout(() => storyVideo.play().catch(() => {}), 300);
@@ -141,7 +143,17 @@ function closeLetterPopup() {
   document.body.style.overflow = '';
 }
 
-if (openLetterBtn)    openLetterBtn.addEventListener('click', () => openPinModal('letter'));
+if (openLetterBtn)    openLetterBtn.addEventListener('click', () => {
+  if (letterUnlocked) {
+    // Already unlocked — go straight to letter popup
+    if (letterPopup) {
+      letterPopup.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+  } else {
+    openPinModal('letter');
+  }
+});
 if (pinModalBackdrop) pinModalBackdrop.addEventListener('click', closePinModal);
 if (pinModalClose)    pinModalClose.addEventListener('click', closePinModal);
 if (pinSubmit)        pinSubmit.addEventListener('click', checkPin);
