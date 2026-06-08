@@ -1413,10 +1413,6 @@ body.main-open #main {
   width: 100%;
   height: auto;
   display: block;
-  /* GPU compositing to reduce flicker */
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 .gallery-overlay {
