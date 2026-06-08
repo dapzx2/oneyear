@@ -92,7 +92,8 @@ function closePinModal() {
 
 function checkPin() {
   const val = pinInput.value.trim();
-  if (val === LETTER_PASSWORD) {
+  const valid = val === LETTER_PASSWORD || val.toLowerCase() === 'moya';
+  if (valid) {
     closePinModal();
     // Show video modal
     videoModal.hidden = false;
@@ -114,11 +115,17 @@ function showLetter() {
   storyVideo.pause();
   videoModal.hidden = true;
   document.body.style.overflow = '';
-  // Hide lock card, show letter
+  // Hide lock card, show letter (override old CSS)
   letterLockArea.style.display = 'none';
-  letterContent.style.display = 'block';
-  letterContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const lc = letterContent;
+  lc.style.display       = 'block';
+  lc.style.opacity       = '1';
+  lc.style.maxHeight     = 'none';
+  lc.style.overflow      = 'visible';
+  lc.style.pointerEvents = 'auto';
+  lc.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
 
 if (openLetterBtn)   openLetterBtn.addEventListener('click', openPinModal);
 if (pinModalBackdrop)pinModalBackdrop.addEventListener('click', closePinModal);
