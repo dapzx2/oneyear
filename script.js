@@ -131,7 +131,7 @@ function checkPin() {
 function showLetter() {
   storyVideo.pause();
   videoModal.hidden = true;
-  if (letterLockArea) letterLockArea.style.display = 'none';
+  // Don't hide lock area — keep button visible so user can reopen
   if (letterPopup) {
     letterPopup.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -141,6 +141,8 @@ function showLetter() {
 function closeLetterPopup() {
   if (letterPopup) letterPopup.hidden = true;
   document.body.style.overflow = '';
+  // Restore lock area so button is still clickable
+  if (letterLockArea) letterLockArea.style.display = '';
 }
 
 if (openLetterBtn)    openLetterBtn.addEventListener('click', () => {
